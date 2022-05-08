@@ -1,60 +1,31 @@
-import pytest
-from com.automationpanda.example.calc_class import Calculator
+import Calculator
+import unittest
 
-NUMBER_1 = 3.0
-NUMBER_2 = 2.0
+class CalculatorTests(unittest.TestCase):
 
+    def setUp(self):
+        self.calculator = Calculator.Calculator()
 
-@pytest.fixture
-def calculator():
-    return Calculator()
+    def test_add_method(self):
+        result = self.calculator.add(4, 2)
+        self.assertEqual(6, result)
 
+    def test_add_method_invalid_value(self):
+        self.assertRaises(ValueError, self.calculator.add, "four", "five")
 
-def verify_answer(expected, answer, last_answer):
-    assert expected == answer
-    assert expected == last_answer
+    def test_multiply_method(self):
+        result = self.calculator.multiply(5, 3)
+        self.assertEqual(15, result)
 
+    def test_multiply_method_invalid_value(self):
+        self.assertRaises(ValueError, self.calculator.multiply, "four", "five")
 
-def test_last_answer_init(calculator):
-    assert calculator.last_answer == 0.0
+    def test_sub_method(self):
+        result = self.calculator.sub(6, 4)
+        self.assertEqual(2, result)
 
+    def test_sub_method_invalid_value(self):
+        self.assertRaises(ValueError, self.calculator.sub, "four", "five")
 
-def test_add(calculator):
-    answer = calculator.add(NUMBER_1, NUMBER_2)
-    verify_answer(5.0, answer, calculator.last_answer)
-
-
-def test_subtract(calculator):
-    answer = calculator.subtract(NUMBER_1, NUMBER_2)
-    verify_answer(1.0, answer, calculator.last_answer)
-
-
-def test_subtract_negative(calculator):
-    answer = calculator.subtract(NUMBER_2, NUMBER_1)
-    verify_answer(-1.0, answer, calculator.last_answer)
-
-
-def test_multiply(calculator):
-    answer = calculator.multiply(NUMBER_1, NUMBER_2)
-    verify_answer(6.0, answer, calculator.last_answer)
-
-
-
-@pytest.mark.parametrize("a,b,expected", [
-    (NUMBER_1, NUMBER_2, NUMBER_1),
-    (NUMBER_2, NUMBER_1, NUMBER_1),
-    (NUMBER_1, NUMBER_1, NUMBER_1),
-])
-def test_maximum(calculator, a, b, expected):
-    answer = calculator.maximum(a, b)
-    verify_answer(expected, answer, calculator.last_answer)
-
-
-@pytest.mark.parametrize("a,b,expected", [
-    (NUMBER_1, NUMBER_2, NUMBER_2),
-    (NUMBER_2, NUMBER_1, NUMBER_2),
-    (NUMBER_2, NUMBER_2, NUMBER_2),
-])
-def test_minimum(calculator, a, b, expected):
-    answer = calculator.minimum(a, b)
-    verify_answer(expected, answer, calculator.last_answer)
+if __name__ == '__main__':
+    unittest.main()
