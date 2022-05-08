@@ -1,8 +1,6 @@
 import Calculator
 import unittest
 
-class CalculatorTests(unittest.TestCase):
-
     def setUp(self):
         self.calculator = Calculator.Calculator()
 
