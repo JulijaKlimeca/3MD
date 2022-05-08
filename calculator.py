@@ -1,13 +1,16 @@
-
 def add(x, y):
     return x + y
 
 def subtract(x, y):
     return x - y
 
+def multiply(x, y):
+    return x - y
+
 print("Select operation.")
 print("1.Add")
 print("2.Subtract")
+print("3.Multiply")
 
 
 while True:
@@ -24,6 +27,9 @@ while True:
 
         elif choice == '2':
             print(num1, "-", num2, "=", subtract(num1, num2))
+ 
+        else choice == '3':
+            print(num1, "*", num2, "=", multiply(num1, num2))
         
         
         next_calculation = input("Let's do next calculation? (yes/no): ")
